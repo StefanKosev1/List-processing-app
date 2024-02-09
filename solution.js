@@ -1,18 +1,18 @@
 let list = [];
 
 document.getElementById("submitButton").addEventListener("click", processInput);
-document.getElementById("inputBox").addEventListener("keypress", function(event){
-  if (event.key === "Enter")
-    processInput();
-});
+document
+  .getElementById("inputBox")
+  .addEventListener("keypress", function (event) {
+    if (event.key === "Enter") processInput();
+  });
 document.getElementById("inputBox").focus();
 
 function processInput() {
-  console.log('added event listener');
+  console.log("added event listener");
   let cmd = document.getElementById("inputBox").value;
   let result = processCommand(cmd);
-  if (result)
-    printToTerminal(result);
+  if (result) printToTerminal(result);
   printToTerminal("List: " + list.join(" "));
   document.getElementById("inputBox").value = "";
 }
@@ -28,7 +28,6 @@ function processCommand(cmd) {
     case "append":
       return append(cmdArgs);
       break;
-
     case "reverse":
       return reverse(cmdArgs);
       break;
@@ -73,38 +72,34 @@ function processCommand(cmd) {
     default:
       return "Error: invalid command";
       break;
-
   }
 }
 
+function append(args) {
+  list = list.concat(args);
+}
 
-
-function rollLeft(){
+function rollLeft() {
   list.push(list.shift());
 }
 
-function rollRight(){
+function rollRight() {
   list.unshift(list.pop());
 }
 
 function deleteFromList(index) {
-  if(list[index]) {
+  if (list[index]) {
     list.splice(list.indexOf(index), 1);
   }
   return `Error: invalid index ${index}`;
 }
 
-
-
 // TODO: implement more commands here ...
-
-
-
-function reverse(args){
+function reverse(args) {
   list = list.reverse();
 }
 
-function sort(args){
+function sort(args) {
   list = list.sort();
 }
 
@@ -118,6 +113,5 @@ function insert(args) {
 }
 
 function count(args) {
-    return list.filter((x) => x === args[0]).length;
+  return list.filter((x) => x === args[0]).length;
 }
-
