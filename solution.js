@@ -28,12 +28,55 @@ function processCommand(cmd) {
     case "append":
       return append(cmdArgs);
       break;
+
+    case "reverse":
+      return reverse(cmdArgs);
+      break;
+    case "sort":
+      return sort(cmdArgs);
+      break;
+
+    case "roll":
+      if (cmdArgs[0] == "left") {
+        rollLeft();
+      } else if (cmdArgs[0] == "right") {
+        rollRight();
+      } else {
+        return "Error: invalid command";
+      }
+      break;
+
+    case "delete":
+      return deleteFromList(cmdArgs[0]);
+      break;
+
+    case "end":
+      const inputBox = document.getElementById("inputBox");
+      document
+        .getElementById("submitButton")
+        .removeEventListener("click", processInput);
+      inputBox.replaceWith(inputBox.cloneNode(true));
+      return "Finished";
+
+    case "prepend":
+      return prepend(cmdArgs);
+      break;
+
+    case "insert":
+      return insert(cmdArgs);
+      break;
+
+    case "count":
+      return count(cmdArgs);
+      break;
+
+    default:
+      return "Error: invalid command";
+      break;
+
   }
 }
 
-function append(args) {
-  list = list.concat(args);
-}
 
 
 function rollLeft(){
@@ -54,6 +97,9 @@ function deleteFromList(index) {
 
 
 // TODO: implement more commands here ...
+
+
+
 function reverse(args){
   list = list.reverse();
 }
@@ -74,3 +120,4 @@ function insert(args) {
 function count(args) {
     return list.filter((x) => x === args[0]).length;
 }
+
